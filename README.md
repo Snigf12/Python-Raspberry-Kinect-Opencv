@@ -16,7 +16,7 @@ The Kinect sensor used is the xBox360 Kinect Sensor - 1414
 3. Install libfreenect to be able to use Kinect sensor - Nice tutorial -> https://naman5.wordpress.com/2014/06/24/experimenting-with-kinect-using-opencv-python-and-open-kinect-libfreenect/ 
   
   AND For more information about the OpenKinect community -> https://openkinect.org/wiki/Main_Page
+  
   
-
 Thanks,
 Snigf12
