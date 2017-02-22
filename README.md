@@ -17,6 +17,7 @@ The Kinect sensor used is the xBox360 Kinect Sensor - 1414
   
   AND For more information about the OpenKinect community -> https://openkinect.org/wiki/Main_Page
   
+For finding spheres, this system uses the HougCircle method
   
 Thanks,
 Snigf12
