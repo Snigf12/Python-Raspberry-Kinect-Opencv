@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import RPi.GPIO
 from numpy import array
-from buscar_pelotasVN_LaplaceLab import*
+from buscar_pelotasVN_Lab import*
 import time
 
 # Relacion de los pines GPIO Numero 
