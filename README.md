@@ -17,6 +17,9 @@ The Kinect sensor used is the xBox360 Kinect Sensor - 1414
 4. Install libfreenect to be able to use Kinect sensor - Nice tutorial -> https://naman5.wordpress.com/2014/06/24/experimenting-with-kinect-using-opencv-python-and-open-kinect-libfreenect/ AND For more information about the OpenKinect community -> https://openkinect.org/wiki/Main_Page
 
 For finding spheres, this system uses the HougCircle method. If the green and orange colors are not well filtered, you can change the ranges of the colors desired, it is used the Lab colorspace.
+
+In the file "video0.wmv" you can find an application of the artifitial vision system, transfering the data of the Raspberry Pi
+to a VEX ARM Cortex-based microcontroller, being able to control a robot to catch the targets.
   
 Thanks,
 Snigf12
