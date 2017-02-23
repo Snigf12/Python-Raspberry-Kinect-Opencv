@@ -3,7 +3,7 @@
 from freenect import*
 from numpy import*
 from cv2 import*
-
+import sys
 
 #Funcion de Adquisicion RGB kinect
 def frame_RGB():
