@@ -3,7 +3,7 @@
 from freenect import*
 from numpy import*
 from cv2 import*
-from time import*
+
 
 #Funcion de Adquisicion RGB kinect
 def frame_RGB():
@@ -82,7 +82,7 @@ def dibuja_circulos(circuloX,img):
     if circuloX is not None:
         #Se convierten los valores (x,y,r) de circulo a enteros
         circuloX = circuloX.astype("int")
-        print(circuloX)
+        #print(circuloX)
         x=circuloX[0,0,0] 
         y=circuloX[0,0,1] 
         r=circuloX[0,0,2] 
@@ -97,7 +97,6 @@ def dibuja_circulos(circuloX,img):
 
 # loop principal
 while True:
-    init=time()
     frame = frame_RGB() #leo frame
     depth = frame_depth() #leo profundidad depth
     depth = resize(depth,(0,0),fx=0.5, fy=0.5)
@@ -111,16 +110,9 @@ while True:
     frame = medianBlur(frame,5)
     #imwrite('frame.jpg',frame)
     
-    color=time()
     mascaraV = filtLAB_Verde(frame)
     mascaraN = filtLAB_Naranja(frame)
-    tc=time()-color
 
-    edge=time()
-    
-    #Toma el valor absoluto -> convertScaleAbs( grad_y, abs_grad_y )
-    #explicación Sobel_x + Sobel_y (addWeighted, suma grad_x y grad_y)
-    #https://github.com/opencv/opencv/blob/master/samples/cpp/tutorial_code/ImgTrans/Sobel_Demo.cpp
 
     mascaraV = Laplacian(mascaraV,CV_8U) #Deteccion de bordes de la mascara
     mascaraN = Laplacian(mascaraN,CV_8U)
@@ -131,10 +123,6 @@ while True:
     
     mascaraV = dilate(mascaraV,diler,iterations = 1) #aplico dilatacion
     mascaraN = dilate(mascaraN,diler,iterations = 1) #aplico dilatacion
-    
-    te=time()-edge
-    print('EDGES',te)
-    print('COLOR',tc)
 
     #Hallo los círculos que estén en detección de bordes
 
@@ -246,9 +234,6 @@ while True:
     # si se oprime la tecla 'q' se sale del loop
     if key == ord("q"):
         break
-
-    t=time()-init
-    print('FIN',t)
 
 # detener y cerrar ventanas
 sys.exit()
