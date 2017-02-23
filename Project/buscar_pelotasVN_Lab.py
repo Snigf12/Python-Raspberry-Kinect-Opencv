@@ -3,7 +3,6 @@
 from freenect import*
 from numpy import*
 from cv2 import*
-from time import*
 
 def buscar_pelotasVN(): #Función principal para llamar desde programa principal
                         #para transmisión serial a CORTEX
@@ -84,7 +83,6 @@ def buscar_pelotasVN(): #Función principal para llamar desde programa principal
 
 
     #Parte principal
-    # init=time() #medir tiempo
     
     frame = frame_RGB() #leo frame
     depth = frame_depth() #leo profundidad depth
@@ -95,11 +93,19 @@ def buscar_pelotasVN(): #Función principal para llamar desde programa principal
     frame = mascaraV
     frame = medianBlur(frame,3)
 
-    color=time()
     mascaraV = filtLAB_Verde(frame)
     mascaraN = filtLAB_Naranja(frame)
 
-    # tc=time()-color #tiempo de filtro de color
+    mascaraV = Laplacian(mascaraV,CV_8U) #Deteccion de bordes de la mascara
+    mascaraN = Laplacian(mascaraN,CV_8U)
+    
+    diler = array([[0,1,0],
+                   [1,1,1],
+                   [0,1,0]],uint8) #Matriz para dilatacion y erosion
+    
+    mascaraV = dilate(mascaraV,diler,iterations = 1) #aplico dilatacion
+    mascaraN = dilate(mascaraN,diler,iterations = 1) #aplico dilatacion
+    
 
     #Encuentro los círculos que estén en detección de bordes
     circuloV = HoughCircles(mascaraV,HOUGH_GRADIENT, 1, 40, param1=60,
@@ -185,11 +191,10 @@ def buscar_pelotasVN(): #Función principal para llamar desde programa principal
     else:
         c1,c2=0,0
         xm,ym=0,0
-    t=time()-init
+
 ##    imshow('VERDE',mascaraV)
 ##    waitKey(1)
 ##    imshow('NARANJA',mascaraN)
 ##    waitKey(1)
-    print('FIN',t,'EDGE',te,'COLOR',tc)
     print(c1,c2,xm,ym)
     return c1,c2,xm,ym
